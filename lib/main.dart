@@ -13,8 +13,47 @@ import 'login_page.dart';
 
 
 void main() {
-  runApp(MyApp());
+  runApp(MyAppLogin());
 }
+
+class MyAppLogin extends StatelessWidget {
+  const MyAppLogin({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return ChangeNotifierProvider(
+      create: (context) => MyAppState(),
+      child: MaterialApp(
+        title: 'BestMatch App',
+        theme: ThemeData(
+          useMaterial3: true,
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.blueGrey),
+        ),
+        home: LoginPage(),
+      ),
+    );
+  }
+}
+
+class MyAppAccountPage extends StatelessWidget {
+  const MyAppAccountPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return ChangeNotifierProvider(
+      create: (context) => MyAppState(),
+      child: MaterialApp(
+        title: 'BestMatch App',
+        theme: ThemeData(
+          useMaterial3: true,
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.blueGrey),
+        ),
+        home: CreateAccountPage(),
+      ),
+    );
+  }
+}
+
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
