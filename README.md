@@ -56,9 +56,9 @@ For our mobbing example we have a screenshot of us all on a call working on a PR
 Branch: https://github.com/rfueston/SWE6813_TEAM_8_BestMatcher/tree/mobbing_sprint_1
 Screenshot: https://github.com/rfueston/SWE6813_TEAM_8_BestMatcher/blob/Storage/Mobbing.png
 
-# prototype 
+# prototype hosting
 
-(link)
+https://swe6813-bestmatcher.web.app
 
 ## Getting Started
 
