@@ -13,7 +13,7 @@ https://sweksu.atlassian.net/jira/software/projects/WEB/boards/3/backlog
 
 # Scrum Story Point Forecast
 
-Our sprint forecast for this sprint is 20 points. We have decided on 20 becuase this is our first sprint and that gives an average of 5 points per person. Since it is our first sprint and the technologies are new we wanted to plan for less incase we ran into any blockers.
+Our sprint forecast for this sprint is 20 points. We have decided on 20 because this is our first sprint and that gives an average of 5 points per person. Since it is our first sprint and the technologies are new we wanted to plan for less incase we ran into any blockers.
 
 # Scrum Standup 
 
