@@ -22,7 +22,7 @@ What Went Well <br>
 •	Using figma for the prototype UI<br>
 •	Kept to the sprint plan<br>
 What to improve <br>
-•	Making sure to close our sprint items when finished.√
+•	Making sure to close our sprint items when finished. <br>
 •	More KT for flutter and firebase<br>
 Action items <br>
 •	Review sprint board during scrum/stand up meetings.<br>
