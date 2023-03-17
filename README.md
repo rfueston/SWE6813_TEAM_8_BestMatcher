@@ -7,11 +7,17 @@ Talia Crawford, Scott Duong, Richard Fueston, Ramya Gangula
 
 APP: BestMatcher
 
+# Scrum Standup 
 
+https://youtu.be/y2liDuWCfJc
 
 # Sprint Review
 
-(link)
+https://youtu.be/iVc6P9vC9s0
+
+# Sprint Retro
+
+https://youtu.be/ez1dliyg7eg
 
 # prototype 
 
