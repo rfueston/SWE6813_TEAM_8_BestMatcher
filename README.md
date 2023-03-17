@@ -17,16 +17,16 @@ https://youtu.be/iVc6P9vC9s0
 
 # Sprint Retro 1
 
-What Went Well
-•	Finished all planned points.
-•	Using figma for the prototype UI
-•	Kept to the sprint plan
-What to improve 
-•	Making sure to close our sprint items when finished.
-•	More KT for flutter and firebase
-Action items 
-•	Review sprint board during scrum/stand up meetings.
-•	Document flutter and firebase setup
+What Went Well <br>
+•	Finished all planned points.<br>
+•	Using figma for the prototype UI<br>
+•	Kept to the sprint plan<br>
+What to improve <br>
+•	Making sure to close our sprint items when finished.√
+•	More KT for flutter and firebase<br>
+Action items <br>
+•	Review sprint board during scrum/stand up meetings.<br>
+•	Document flutter and firebase setup<br>
 
 https://youtu.be/ez1dliyg7eg
 
