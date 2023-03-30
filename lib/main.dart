@@ -1,4 +1,8 @@
+import 'dart:developer';
+
 import 'package:english_words/english_words.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'create_account_page.dart';
@@ -11,11 +15,13 @@ import 'settings_page.dart';
 import 'home_page.dart';
 import 'login_page.dart';
 
-
-void main() {
+Future main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  // Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(MyAppLogin());
 }
-
+final navigatorKey = GlobalKey<NavigatorState>();
 class MyAppLogin extends StatelessWidget {
   const MyAppLogin({super.key});
 
@@ -24,12 +30,27 @@ class MyAppLogin extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (context) => MyAppState(),
       child: MaterialApp(
+        navigatorKey: navigatorKey,
         title: 'BestMatch App',
         theme: ThemeData(
           useMaterial3: true,
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.blueGrey),
         ),
-        home: LoginPage(),
+        home: StreamBuilder<User?>(
+            stream: FirebaseAuth.instance.authStateChanges(),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return Center(child: CircularProgressIndicator());
+              } else if (snapshot.hasError) {
+                return Center(child: Text('Something went wrong'));
+              } else if (snapshot.hasData) {
+                log("Going to MyApp page");
+                return MyApp();
+              } else {
+                log("Going back to login page");
+                return LoginPage();
+              }
+            }),
       ),
     );
   }
@@ -54,7 +75,6 @@ class MyAppAccountPage extends StatelessWidget {
   }
 }
 
-
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -75,7 +95,7 @@ class MyApp extends StatelessWidget {
 }
 
 class MyAppState extends ChangeNotifier {
- //TODO:update for news feed
+  //TODO:update for news feed
 }
 
 class NavigationBar extends StatefulWidget {
@@ -116,10 +136,12 @@ class MyHomePageState extends State<NavigationBar> {
     }
 
     return LayoutBuilder(builder: (context, constraints) {
+      final user = FirebaseAuth.instance.currentUser;
+      log("Email : " + user!.email!);
       return Scaffold(
         appBar: AppBar(
           title: Text(
-            'BestMatcher',
+            'BestMatch, Welcome ',
             style: TextStyle(color: Colors.deepPurpleAccent),
           ),
         ),
