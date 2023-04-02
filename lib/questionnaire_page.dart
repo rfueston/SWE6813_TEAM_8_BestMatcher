@@ -32,7 +32,7 @@ class QuestionnairePage extends StatelessWidget {
               decoration: InputDecoration(
                 border: OutlineInputBorder(),
                 labelText:
-                    'If you are losing will you quit in the middle of a game?',
+                'If you are losing will you quit in the middle of a game?',
               ),
             ),
             const TextField(
@@ -87,7 +87,7 @@ class QuestionnairePage extends StatelessWidget {
               decoration: InputDecoration(
                 border: OutlineInputBorder(),
                 labelText:
-                    'Do you come up with strategies with the team or try to play solo?',
+                'Do you come up with strategies with the team or try to play solo?',
               ),
             ),
             Container(
