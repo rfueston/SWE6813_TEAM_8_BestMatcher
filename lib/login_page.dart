@@ -1,8 +1,10 @@
+import 'dart:developer';
+
 import 'package:english_words/english_words.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'main.dart';
-
+import 'package:firebase_auth/firebase_auth.dart';
 
 
 class LoginPage extends StatefulWidget {
@@ -13,12 +15,26 @@ class LoginPage extends StatefulWidget {
 
 class _MyloginPageState extends State<LoginPage> {
 
+  final userNameController = TextEditingController();
+  final passwordController = TextEditingController();
+
   void _logIn() {
-    setState(() {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => const MyApp()),
-        );
+    showDialog(context: context, barrierDismissible: false,
+        builder: (context)=> Center(child: CircularProgressIndicator()));
+    setState(() async {
+        // Navigator.push(
+        //   context,
+        //   MaterialPageRoute(builder: (context) => const MyApp()),
+        // );
+      // log("User Name: ${userNameController.text}, Password: ${passwordController.text}");
+      try {
+        await FirebaseAuth.instance.signInWithEmailAndPassword(
+            email: userNameController.text.trim(),
+            password: passwordController.text.trim());
+      }on FirebaseAuthException catch (e){
+        print(e);
+      }
+      navigatorKey.currentState!.popUntil((route)=> route.isFirst);
     });
   }
 
@@ -33,6 +49,7 @@ class _MyloginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       appBar: AppBar(
         title: Text("BestMatcher"),
@@ -43,14 +60,16 @@ class _MyloginPageState extends State<LoginPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const TextField(
+             TextField(
+              controller: userNameController,
               obscureText: false,
               decoration: InputDecoration(
                 border: OutlineInputBorder(),
                 labelText: 'USERNAME',
               ),
             ),
-            const TextField(
+             TextField(
+              controller: passwordController,
               obscureText: true,
               decoration: InputDecoration(
                 border: OutlineInputBorder(),
