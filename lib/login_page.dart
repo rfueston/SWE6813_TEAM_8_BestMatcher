@@ -1,8 +1,5 @@
-import 'dart:developer';
-
-import 'package:english_words/english_words.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'account_login.dart';
 import 'main.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -18,24 +15,45 @@ class _MyloginPageState extends State<LoginPage> {
   final userNameController = TextEditingController();
   final passwordController = TextEditingController();
 
-  void _logIn() {
-    showDialog(context: context, barrierDismissible: false,
-        builder: (context)=> Center(child: CircularProgressIndicator()));
-    setState(() async {
-        // Navigator.push(
-        //   context,
-        //   MaterialPageRoute(builder: (context) => const MyApp()),
-        // );
-      // log("User Name: ${userNameController.text}, Password: ${passwordController.text}");
-      try {
-        await FirebaseAuth.instance.signInWithEmailAndPassword(
-            email: userNameController.text.trim(),
-            password: passwordController.text.trim());
-      }on FirebaseAuthException catch (e){
-        print(e);
-      }
-      navigatorKey.currentState!.popUntil((route)=> route.isFirst);
-    });
+  @override
+  void dispose() {
+    userNameController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
+
+  Future<void> _logIn() async {
+    //TODO: implement spinner
+    // showDialog(context: context, barrierDismissible: false,
+    //     builder: (context)=> Center(child: CircularProgressIndicator()));
+
+    var acceptedAcount = AccountLogIn()
+        .accountLogIn(userNameController.text, passwordController.text);
+
+    if (await acceptedAcount == true) {
+      setState(() {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const MyApp()),
+        );
+      });
+    } else {
+      setState(() {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const MyAppLogin()),
+        );
+      });
+    }
+      //TODO: implement FireBase auth lib instead of custom
+      // try {
+      //   await FirebaseAuth.instance.signInWithEmailAndPassword(
+      //       email: userNameController.text.trim(),
+      //       password: passwordController.text.trim());
+      // }on FirebaseAuthException catch (e){
+      //   print(e);
+      // }
+      // navigatorKey.currentState!.popUntil((route)=> route.isFirst);
   }
 
   void _createAccount() {
@@ -49,7 +67,6 @@ class _MyloginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(
         title: Text("BestMatcher"),
@@ -60,34 +77,46 @@ class _MyloginPageState extends State<LoginPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-             TextField(
-              controller: userNameController,
-              obscureText: false,
-              decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: 'USERNAME',
+            SizedBox(
+              width: 250.0,
+              height: 70,
+              child: TextField(
+                key: Key('loginusername'),
+                controller: userNameController,
+                maxLength: 40,
+                obscureText: false,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: 'Username',
+                ),
               ),
             ),
-             TextField(
-              controller: passwordController,
-              obscureText: true,
-              decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: 'PASSWORD',
+            SizedBox(
+              width: 250.0,
+              height: 70,
+              child: TextField(
+                key: Key('loginpassword'),
+                controller: passwordController,
+                maxLength: 40,
+                obscureText: true,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: 'Password',
+                ),
               ),
             ),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
-                minimumSize: Size(100, 40),
-                maximumSize: Size(300, 40),
+                minimumSize: const Size(250, 40),
+                maximumSize: const Size(250, 40),
               ),
               onPressed: _logIn,
               child: const Icon(Icons.login),
             ),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
-                minimumSize: Size(100, 40),
-                maximumSize: Size(300, 40),
+                minimumSize: const Size(250, 40),
+                maximumSize: const Size(250, 40),
               ),
               onPressed: _createAccount,
               child: const Icon(Icons.account_box),
@@ -95,7 +124,6 @@ class _MyloginPageState extends State<LoginPage> {
           ],
         ),
       ),
-// This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }

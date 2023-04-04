@@ -1,6 +1,4 @@
 import 'dart:developer';
-
-import 'package:english_words/english_words.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -15,13 +13,24 @@ import 'settings_page.dart';
 import 'home_page.dart';
 import 'login_page.dart';
 
-Future main() async {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
-  // Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  await Firebase.initializeApp(
+    options: FirebaseOptions(
+        apiKey: "HIDDEN",
+        authDomain: "swe6813-bestmatcher.firebaseapp.com",
+        databaseURL: "https://swe6813-bestmatcher-default-rtdb.firebaseio.com",
+        projectId: "swe6813-bestmatcher",
+        storageBucket: "swe6813-bestmatcher.appspot.com",
+        messagingSenderId: "565968558840",
+        appId: "1:565968558840:web:cffa7ae9ddb68b9530390d",
+        measurementId: "G-8T28GS8GW6"
+    ),
+  );
   runApp(MyAppLogin());
 }
-final navigatorKey = GlobalKey<NavigatorState>();
+//TODO: use navigatorKey
+// final navigatorKey = GlobalKey<NavigatorState>();
 class MyAppLogin extends StatelessWidget {
   const MyAppLogin({super.key});
 
@@ -30,27 +39,30 @@ class MyAppLogin extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (context) => MyAppState(),
       child: MaterialApp(
-        navigatorKey: navigatorKey,
-        title: 'BestMatch App',
+        //TODO: use navigatorKey
+        // navigatorKey: navigatorKey,
+        title: 'BestMatcher',
         theme: ThemeData(
           useMaterial3: true,
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.blueGrey),
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.grey),
         ),
-        home: StreamBuilder<User?>(
-            stream: FirebaseAuth.instance.authStateChanges(),
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return Center(child: CircularProgressIndicator());
-              } else if (snapshot.hasError) {
-                return Center(child: Text('Something went wrong'));
-              } else if (snapshot.hasData) {
-                log("Going to MyApp page");
-                return MyApp();
-              } else {
-                log("Going back to login page");
-                return LoginPage();
-              }
-            }),
+          home: LoginPage()
+        //TODO: added user stream data
+        // home: StreamBuilder<User?>(
+        //     stream: FirebaseAuth.instance.authStateChanges(),
+        //     builder: (context, snapshot) {
+        //       if (snapshot.connectionState == ConnectionState.waiting) {
+        //         return Center(child: CircularProgressIndicator());
+        //       } else if (snapshot.hasError) {
+        //         return Center(child: Text('Something went wrong'));
+        //       } else if (snapshot.hasData) {
+        //         log("Going to MyApp page");
+        //         return MyApp();
+        //       } else {
+        //         log("Going back to login page");
+        //         return LoginPage();
+        //       }
+        //     }),
       ),
     );
   }
@@ -64,10 +76,10 @@ class MyAppAccountPage extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (context) => MyAppState(),
       child: MaterialApp(
-        title: 'BestMatch App',
+        title: 'BestMatcher',
         theme: ThemeData(
           useMaterial3: true,
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.blueGrey),
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.grey),
         ),
         home: CreateAccountPage(),
       ),
@@ -83,7 +95,7 @@ class MyApp extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (context) => MyAppState(),
       child: MaterialApp(
-        title: 'BestMatch App',
+        title: 'BestMatcher',
         theme: ThemeData(
           useMaterial3: true,
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurpleAccent),
@@ -136,12 +148,12 @@ class MyHomePageState extends State<NavigationBar> {
     }
 
     return LayoutBuilder(builder: (context, constraints) {
-      final user = FirebaseAuth.instance.currentUser;
-      log("Email : " + user!.email!);
+      // final user = FirebaseAuth.instance.currentUser;
+      // log("Email : " + user!.email!);
       return Scaffold(
         appBar: AppBar(
           title: Text(
-            'BestMatch, Welcome ',
+            'BestMatcher, Welcome ',
             style: TextStyle(color: Colors.deepPurpleAccent),
           ),
         ),
