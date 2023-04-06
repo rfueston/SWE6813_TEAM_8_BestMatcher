@@ -23,3 +23,6 @@ install:
 
 script:
   - flutter build web
+
+after_success:
+  - firebase deploy --token 1//0fddaZi7W6SZLCgYIARAAGA8SNwF-L9Irg7XbR12xoNSpR0Q3aBbeKEk2CQ7Wvt7s2F9YGw5XKbfK61P0lYVvQoiEMZxNoOz84Q4
