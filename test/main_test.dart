@@ -30,7 +30,7 @@ void main() {
     await tester.pump();
 
     // Verify that text has changed to selected page
-    expect(find.text('QuestionnairePage'), findsOneWidget);
+    expect(find.text('Please select your reaction to getting player killed:'), findsOneWidget);
     expect(find.text('News will go here!'), findsNothing);
   });
 
@@ -46,7 +46,7 @@ void main() {
     await tester.pump();
 
     // Verify that text has changed to selected page
-    expect(find.text('FriendsListPage'), findsOneWidget);
+    expect(find.text('You have friends:'), findsOneWidget);
     expect(find.text('News will go here!'), findsNothing);
   });
 

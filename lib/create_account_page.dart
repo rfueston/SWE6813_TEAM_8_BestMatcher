@@ -86,7 +86,7 @@ class _MyCreateAccountPageState extends State<CreateAccountPage> {
           children: <Widget>[
             SizedBox(
               width: 250.0,
-              height: 70,
+              height: 60,
               child: TextField(
                 key: Key('createaccountfirstname'),
                 controller: myControllerFirstName,
@@ -100,7 +100,7 @@ class _MyCreateAccountPageState extends State<CreateAccountPage> {
             ),
             SizedBox(
               width: 250.0,
-              height: 70,
+              height: 60,
               child: TextField(
                 key: Key('createaccountlastname'),
                 controller: myControllerLastName,
@@ -114,7 +114,7 @@ class _MyCreateAccountPageState extends State<CreateAccountPage> {
             ),
             SizedBox(
               width: 250.0,
-              height: 70,
+              height: 60,
               child: TextField(
                 key: Key('createaccountusername'),
                 controller: myControllerUsername,
@@ -128,7 +128,7 @@ class _MyCreateAccountPageState extends State<CreateAccountPage> {
             ),
             SizedBox(
               width: 250.0,
-              height: 70,
+              height: 60,
               child: TextField(
                 key: Key('createaccountpassword'),
                 controller: myControllerPassword,
@@ -142,7 +142,7 @@ class _MyCreateAccountPageState extends State<CreateAccountPage> {
             ),
             SizedBox(
               width: 250.0,
-              height: 70,
+              height: 60,
               child: TextField(
                 key: Key('createaccountrepeat'),
                 controller: myControllerRepeatPassword,
@@ -156,7 +156,7 @@ class _MyCreateAccountPageState extends State<CreateAccountPage> {
             ),
             SizedBox(
               width: 250.0,
-              height: 70,
+              height: 60,
               child: TextField(
                 key: Key('createaccountemail'),
                 controller: myControllerEmail,
@@ -170,7 +170,7 @@ class _MyCreateAccountPageState extends State<CreateAccountPage> {
             ),
             SizedBox(
               width: 250.0,
-              height: 70,
+              height: 60,
               child: TextField(
                 key: Key('createaccountage'),
                 controller: myControllerAge,

@@ -21,6 +21,7 @@ class QuestionnairePage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             const TextField(
+              key: Key('firstquestion'),
               obscureText: false,
               decoration: InputDecoration(
                 border: OutlineInputBorder(),
@@ -28,6 +29,7 @@ class QuestionnairePage extends StatelessWidget {
               ),
             ),
             const TextField(
+              key: Key('secondquestion'),
               obscureText: false,
               decoration: InputDecoration(
                 border: OutlineInputBorder(),
@@ -36,6 +38,7 @@ class QuestionnairePage extends StatelessWidget {
               ),
             ),
             const TextField(
+              key: Key('thirdquestion'),
               obscureText: false,
               decoration: InputDecoration(
                 border: OutlineInputBorder(),
@@ -83,6 +86,7 @@ class QuestionnairePage extends StatelessWidget {
               ),
             ),
             const TextField(
+              key: Key('fifthquestion'),
               obscureText: false,
               decoration: InputDecoration(
                 border: OutlineInputBorder(),
