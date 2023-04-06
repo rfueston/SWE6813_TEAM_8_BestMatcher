@@ -123,5 +123,5 @@ https://github.com/rfueston/SWE6813_TEAM_8_BestMatcher/actions
 
 <h2>Prototype Link</h2>
 
-(Current prototype is a Web App.)
+Current prototype is a Web App.
 https://swe6733-adventure-quest.web.app
