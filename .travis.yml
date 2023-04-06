@@ -1,6 +1,6 @@
 langauge: node_js
 node_js:
-  -"4.0"
+  -"12.12.47"
 script:
   - echo "deploying"
 install:
