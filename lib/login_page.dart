@@ -83,7 +83,7 @@ class _MyloginPageState extends State<LoginPage> {
               child: TextField(
                 key: Key('loginusername'),
                 controller: userNameController,
-                maxLength: 40,
+                maxLength: 20,
                 obscureText: false,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
@@ -97,7 +97,7 @@ class _MyloginPageState extends State<LoginPage> {
               child: TextField(
                 key: Key('loginpassword'),
                 controller: passwordController,
-                maxLength: 40,
+                maxLength: 20,
                 obscureText: true,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),

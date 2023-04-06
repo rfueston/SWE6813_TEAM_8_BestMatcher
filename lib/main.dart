@@ -12,12 +12,14 @@ import 'match_making_page.dart';
 import 'settings_page.dart';
 import 'home_page.dart';
 import 'login_page.dart';
+import 'friends_list.dart';
+import 'dart:async';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: FirebaseOptions(
-        apiKey: "HIDDEN",
+        apiKey: "AIzaSyA5SgghyrvC1tZbdKS9l8BDd1J-s8GlaUk",
         authDomain: "swe6813-bestmatcher.firebaseapp.com",
         databaseURL: "https://swe6813-bestmatcher-default-rtdb.firebaseio.com",
         projectId: "swe6813-bestmatcher",
@@ -107,7 +109,13 @@ class MyApp extends StatelessWidget {
 }
 
 class MyAppState extends ChangeNotifier {
-  //TODO:update for news feed
+  var friends = {'test', 'test1', 'test2', 'test3', 'test4', 'test5'};
+
+//TODO: https://sweksu.atlassian.net/browse/WEB-33
+// var friends = FriendsList().setFriendsList("sdu");
+
+
+//TODO:update for news feed
 }
 
 class NavigationBar extends StatefulWidget {
