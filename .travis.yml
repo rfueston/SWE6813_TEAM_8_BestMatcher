@@ -1,9 +1,25 @@
-langauge: node_js
-node_js:
-  -"12.12.47"
-script:
-  - echo "deploying"
+# langauge: node_js
+# node_js:
+#   -"12.12.47"
+# script:
+#   - echo "deploying"
+# install:
+#   - npm install -g firebase=tools
+# after_success:
+#   - firebase deploy --token 1//0fddaZi7W6SZLCgYIARAAGA8SNwF-L9Irg7XbR12xoNSpR0Q3aBbeKEk2CQ7Wvt7s2F9YGw5XKbfK61P0lYVvQoiEMZxNoOz84Q4
+
+language: dart
+dart:
+  - stable
+
 install:
-  - npm install -g firebase=tools
-after_success:
-  - firebase deploy --token 1//0fddaZi7W6SZLCgYIARAAGA8SNwF-L9Irg7XbR12xoNSpR0Q3aBbeKEk2CQ7Wvt7s2F9YGw5XKbfK61P0lYVvQoiEMZxNoOz84Q4
+  # https://flutter.dev/docs/get-started/web
+  - echo "Configure Flutter"
+  - git clone https://github.com/flutter/flutter.git -b beta
+  - export PATH="$PATH:`pwd`/flutter/bin"
+  - flutter upgrade
+  - flutter config --enable-web
+  - flutter doctor
+
+script:
+  - flutter build web
