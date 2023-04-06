@@ -118,16 +118,8 @@ Sprint Retro:
 https://youtu.be/CPerpQfko-c
 
 <h2>CICD</h2>
-Before PR:
 
-![Screenshot](https://github.com/rfueston/SWE6813_TEAM_8_BestMatcher/blob/Storage/SPRINT_2_CICD_BEFORE.png)
-
-![Screenshot](https://github.com/rfueston/SWE6813_TEAM_8_BestMatcher/blob/Storage/Sprint_2_CICD.png)
-
-
-After PR:
-![Screenshot]()
-
+https://github.com/rfueston/SWE6813_TEAM_8_BestMatcher/actions
 
 <h2>Prototype Link</h2>
 
