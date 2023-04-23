@@ -32,7 +32,7 @@ void main() async {
   runApp(MyAppLogin());
 }
 //TODO: use navigatorKey
-// final navigatorKey = GlobalKey<NavigatorState>();
+final navigatorKey = GlobalKey<NavigatorState>();
 class MyAppLogin extends StatelessWidget {
   const MyAppLogin({super.key});
 
@@ -42,29 +42,29 @@ class MyAppLogin extends StatelessWidget {
       create: (context) => MyAppState(),
       child: MaterialApp(
         //TODO: use navigatorKey
-        // navigatorKey: navigatorKey,
+        navigatorKey: navigatorKey,
         title: 'BestMatcher',
         theme: ThemeData(
           useMaterial3: true,
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.grey),
         ),
-          home: LoginPage()
+          // home: LoginPage()
         //TODO: added user stream data
-        // home: StreamBuilder<User?>(
-        //     stream: FirebaseAuth.instance.authStateChanges(),
-        //     builder: (context, snapshot) {
-        //       if (snapshot.connectionState == ConnectionState.waiting) {
-        //         return Center(child: CircularProgressIndicator());
-        //       } else if (snapshot.hasError) {
-        //         return Center(child: Text('Something went wrong'));
-        //       } else if (snapshot.hasData) {
-        //         log("Going to MyApp page");
-        //         return MyApp();
-        //       } else {
-        //         log("Going back to login page");
-        //         return LoginPage();
-        //       }
-        //     }),
+        home: StreamBuilder<User?>(
+            stream: FirebaseAuth.instance.authStateChanges(),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return Center(child: CircularProgressIndicator());
+              } else if (snapshot.hasError) {
+                return Center(child: Text('Something went wrong'));
+              } else if (snapshot.hasData) {
+                log("Going to MyApp page");
+                return MyApp();
+              } else {
+                log("Going back to login page");
+                return LoginPage();
+              }
+            }),
       ),
     );
   }
@@ -156,8 +156,8 @@ class MyHomePageState extends State<NavigationBar> {
     }
 
     return LayoutBuilder(builder: (context, constraints) {
-      // final user = FirebaseAuth.instance.currentUser;
-      // log("Email : " + user!.email!);
+      final user = FirebaseAuth.instance.currentUser;
+      log("Email : " + user!.email!);
       return Scaffold(
         appBar: AppBar(
           title: Text(

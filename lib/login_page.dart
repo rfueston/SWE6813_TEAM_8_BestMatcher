@@ -24,36 +24,37 @@ class _MyloginPageState extends State<LoginPage> {
 
   Future<void> _logIn() async {
     //TODO: implement spinner
-    // showDialog(context: context, barrierDismissible: false,
-    //     builder: (context)=> Center(child: CircularProgressIndicator()));
+    showDialog(context: context, barrierDismissible: false,
+        builder: (context)=> Center(child: CircularProgressIndicator()));
 
     var acceptedAcount = AccountLogIn()
         .accountLogIn(userNameController.text, passwordController.text);
 
-    if (await acceptedAcount == true) {
-      setState(() {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => const MyApp()),
-        );
+    // if (await acceptedAcount == true) {
+      setState(() async {
+        //     Navigator.push(
+        //       context,
+        //       MaterialPageRoute(builder: (context) => const MyApp()),
+        //     );
+        //   });
+        // } else {
+        //   setState(() {
+        //     Navigator.push(
+        //       context,
+        //       MaterialPageRoute(builder: (context) => const MyAppLogin()),
+        //     );
+        //   });
+        // }
+        //TODO: implement FireBase auth lib instead of custom
+        try {
+          await FirebaseAuth.instance.signInWithEmailAndPassword(
+              email: userNameController.text.trim(),
+              password: passwordController.text.trim());
+        } on FirebaseAuthException catch (e) {
+          print(e);
+        }
+        navigatorKey.currentState!.popUntil((route) => route.isFirst);
       });
-    } else {
-      setState(() {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => const MyAppLogin()),
-        );
-      });
-    }
-      //TODO: implement FireBase auth lib instead of custom
-      // try {
-      //   await FirebaseAuth.instance.signInWithEmailAndPassword(
-      //       email: userNameController.text.trim(),
-      //       password: passwordController.text.trim());
-      // }on FirebaseAuthException catch (e){
-      //   print(e);
-      // }
-      // navigatorKey.currentState!.popUntil((route)=> route.isFirst);
   }
 
   void _createAccount() {
