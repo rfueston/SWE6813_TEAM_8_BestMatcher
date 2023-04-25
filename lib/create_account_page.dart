@@ -1,3 +1,5 @@
+import 'package:best_matcher/login_page.dart';
+import 'package:best_matcher/utils.dart';
 import 'package:flutter/material.dart';
 import 'main.dart';
 import 'create_account.dart';
@@ -40,7 +42,7 @@ class _MyCreateAccountPageState extends State<CreateAccountPage> {
     } else if ((await existedAcount == false &&
         myControllerPassword.text == myControllerRepeatPassword.text
         && myControllerUsername.text != '')) {
-      CreateAccount().createUserAccount(
+      var accountCreated = CreateAccount().createUserAccount(
           myControllerFirstName.text,
           myControllerLastName.text,
           myControllerUsername.text,
@@ -48,20 +50,27 @@ class _MyCreateAccountPageState extends State<CreateAccountPage> {
           myControllerEmail.text,
           myControllerAge.text);
 
-      setState(() {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => const MyApp()),
-        );
-      });
+      // setState(() {
+      //   Navigator.push(
+      //     context,
+      //     MaterialPageRoute(builder: (context) => const MyApp()),
+      //   );
+      // });
+      if(await accountCreated == 'true'){
+        Utils.showMyDialog('Success', 'Account created successfully! Please login with your credentials.', context);
+        setState(() {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const LoginPage()),
+          );
+        });
+      }else {
+        Utils.showMyDialog('Failed', 'Account creation failed! '+ await accountCreated, context);
+      }
+
     } else {
-      setState(() {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (context) => const MyAppLogin()),
-        );
-      });
+      Utils.showMyDialog('Failed', 'Account creation failed! ', context);
+
     }
   }
 
@@ -69,7 +78,7 @@ class _MyCreateAccountPageState extends State<CreateAccountPage> {
     setState(() {
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => const MyAppLogin()),
+        MaterialPageRoute(builder: (context) => const LoginPage()),
       );
     });
   }
@@ -205,4 +214,5 @@ class _MyCreateAccountPageState extends State<CreateAccountPage> {
       ),
     );
   }
+
 }

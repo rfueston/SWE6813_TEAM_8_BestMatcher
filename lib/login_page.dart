@@ -1,3 +1,4 @@
+import 'package:best_matcher/utils.dart';
 import 'package:flutter/material.dart';
 import 'account_login.dart';
 import 'main.dart';
@@ -27,8 +28,8 @@ class _MyloginPageState extends State<LoginPage> {
     showDialog(context: context, barrierDismissible: false,
         builder: (context)=> Center(child: CircularProgressIndicator()));
 
-    var acceptedAcount = AccountLogIn()
-        .accountLogIn(userNameController.text, passwordController.text);
+    // var acceptedAcount = AccountLogIn()
+    //     .accountLogIn(userNameController.text, passwordController.text);
 
     // if (await acceptedAcount == true) {
       setState(() async {
@@ -52,6 +53,7 @@ class _MyloginPageState extends State<LoginPage> {
               password: passwordController.text.trim());
         } on FirebaseAuthException catch (e) {
           print(e);
+          await Utils.showMyDialog('Failed', 'Account login failed!  ${e.message}', context);
         }
         navigatorKey.currentState!.popUntil((route) => route.isFirst);
       });
