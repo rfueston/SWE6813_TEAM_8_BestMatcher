@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-
+String currentUser = "";
 class AccountLogIn {
 
   Future<bool> accountLogIn(username, password) async {
@@ -13,6 +13,7 @@ class AccountLogIn {
         .get().then((value) => value.size > 0 ? true : false);
 
     if(account == true){
+      currentUser = username; //set global current user
       return true;
     } else {
       return false;
