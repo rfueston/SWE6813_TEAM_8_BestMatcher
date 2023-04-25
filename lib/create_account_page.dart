@@ -28,8 +28,13 @@ class _MyCreateAccountPageState extends State<CreateAccountPage> {
   }
 
   Future<void> _createAccountLogin() async {
-    var existedAcount =
-    CreateAccount().createAccountCheck(myControllerUsername.text);
+    var existedAcount = false;
+    if(myControllerUsername.text.trim() == ''){
+      var error = " Empty user name";
+      Utils.showMyDialog('Failed', 'Account creation failed!' + error, context);
+    }else {
+      CreateAccount().createAccountCheck(myControllerUsername.text);
+    }
 
     if (await existedAcount == true) {
       setState(() {
@@ -42,6 +47,7 @@ class _MyCreateAccountPageState extends State<CreateAccountPage> {
     } else if ((await existedAcount == false &&
         myControllerPassword.text == myControllerRepeatPassword.text
         && myControllerUsername.text != '')) {
+      if(myControllerUsername.text == myControllerEmail.text){
       var accountCreated = CreateAccount().createUserAccount(
           myControllerFirstName.text,
           myControllerLastName.text,
@@ -56,20 +62,36 @@ class _MyCreateAccountPageState extends State<CreateAccountPage> {
       //     MaterialPageRoute(builder: (context) => const MyApp()),
       //   );
       // });
-      if(await accountCreated == 'true'){
-        Utils.showMyDialog('Success', 'Account created successfully! Please login with your credentials.', context);
+      if (await accountCreated == 'true') {
+        Utils.showMyDialog('Success',
+            'Account created successfully! Please login with your credentials.',
+            context);
         setState(() {
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => const LoginPage()),
           );
         });
-      }else {
-        Utils.showMyDialog('Failed', 'Account creation failed! '+ await accountCreated, context);
+      } else {
+        Utils.showMyDialog(
+            'Failed', 'Account creation failed! ' + await accountCreated,
+            context);
       }
-
+    }else{
+      Utils.showMyDialog('Error', 'Please provide same email id for both username and email fields', context);
+    }
     } else {
-      Utils.showMyDialog('Failed', 'Account creation failed! ', context);
+      var error;
+      if(myControllerPassword.text != myControllerRepeatPassword.text){
+        error = " Passwords don't match";
+      }
+      if(myControllerUsername.text.trim() == '' && existedAcount){
+        error = " Empty user name";
+      }
+      if(myControllerEmail.text.trim() == ''){
+        error = " Empty email field";
+      }
+      Utils.showMyDialog('Failed', 'Account creation failed!' + error, context);
 
     }
   }
@@ -142,7 +164,7 @@ class _MyCreateAccountPageState extends State<CreateAccountPage> {
                 key: Key('createaccountpassword'),
                 controller: myControllerPassword,
                 maxLength: 20,
-                obscureText: false,
+                obscureText: true,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
                   labelText: 'Password',
@@ -156,7 +178,7 @@ class _MyCreateAccountPageState extends State<CreateAccountPage> {
                 key: Key('createaccountrepeat'),
                 controller: myControllerRepeatPassword,
                 maxLength: 20,
-                obscureText: false,
+                obscureText: true,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
                   labelText: 'Repeat Password',
