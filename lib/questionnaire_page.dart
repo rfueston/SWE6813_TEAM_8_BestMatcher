@@ -1,4 +1,5 @@
 import 'package:english_words/english_words.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'main.dart';
@@ -7,7 +8,7 @@ import 'account_login.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 const List<String> rating = ["0","1","2","3","4","5","6","7","8","9","10"];
-final user = currentUser;
+final user = FirebaseAuth.instance.currentUser?.email;
 
 class GameProfile {
   final String? id;
@@ -109,7 +110,7 @@ class _WidgetSetupState extends State<WidgetSetup> {
 
   }
   final _db = FirebaseFirestore.instance;
-  Future<List<GameProfile>> getMyGameProfile(String user) async {
+  Future<List<GameProfile>> getMyGameProfile(String? user) async {
     final snapshot = await _db.collection("GameProfiles").get();
     final myGameProfile = snapshot.docs.map((e)
     => GameProfile.fromSnapshot(e)).toList();
