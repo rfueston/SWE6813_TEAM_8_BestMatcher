@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -94,6 +95,57 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final user = FirebaseAuth.instance.currentUser;
+    var username = user?.email;
+    final accountCollection =
+    FirebaseFirestore.instance.collection('Accounts').doc(username);
+    var data = null;
+    accountCollection.get().then(
+          (DocumentSnapshot doc) {
+        data = doc.data() as Map<String, dynamic>;
+        print('Data : ' + data['gdpr'].toString());
+        if (data['gdpr'] == null || !data['gdpr']) {
+          showDialog<void>(
+            context: context,
+            barrierDismissible: false, // user must tap button!
+            builder: (BuildContext context) {
+              return AlertDialog(
+                title: Text('Terms of use'),
+                content: SingleChildScrollView(
+                  child: ListBody(
+                    children: <Widget>[
+                      Text(
+                          'You accept to allow us to use the information shared in this application.'),
+                      // Text('Would you like to approve of this message?'),
+                    ],
+                  ),
+                ),
+                actions: <Widget>[
+                  TextButton(
+                    child: const Text('Accept'),
+                    onPressed: () {
+                      final data = <String, dynamic>{"gdpr": true};
+                      FirebaseFirestore.instance
+                          .collection('Accounts')
+                          .doc(username)
+                          .update(data);
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                  TextButton(
+                    child: const Text('Reject'),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                ],
+              );
+            },
+          );
+        }
+      },
+      onError: (e) => print("Error getting document: $e"),
+    );
     return ChangeNotifierProvider(
       create: (context) => MyAppState(),
       child: MaterialApp(

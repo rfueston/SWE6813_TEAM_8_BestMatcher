@@ -39,6 +39,7 @@ class CreateAccount {
         "lastname": lastname,
         "username": username,
         "age": age,
+        "gdpr": false
       };
       accountCollection.doc(username).set(data);
       return 'true';
