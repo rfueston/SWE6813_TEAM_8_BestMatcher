@@ -1,3 +1,5 @@
+import 'package:best_matcher/login_page.dart';
+import 'package:best_matcher/utils.dart';
 import 'package:flutter/material.dart';
 import 'main.dart';
 import 'create_account.dart';
@@ -26,8 +28,13 @@ class _MyCreateAccountPageState extends State<CreateAccountPage> {
   }
 
   Future<void> _createAccountLogin() async {
-    var existedAcount =
-    CreateAccount().createAccountCheck(myControllerUsername.text);
+    var existedAcount = false;
+    if(myControllerUsername.text.trim() == ''){
+      var error = " Empty user name";
+      Utils.showMyDialog('Failed', 'Account creation failed!' + error, context);
+    }else {
+      CreateAccount().createAccountCheck(myControllerUsername.text);
+    }
 
     if (await existedAcount == true) {
       setState(() {
@@ -40,7 +47,8 @@ class _MyCreateAccountPageState extends State<CreateAccountPage> {
     } else if ((await existedAcount == false &&
         myControllerPassword.text == myControllerRepeatPassword.text
         && myControllerUsername.text != '')) {
-      CreateAccount().createUserAccount(
+      if(myControllerUsername.text == myControllerEmail.text){
+      var accountCreated = CreateAccount().createUserAccount(
           myControllerFirstName.text,
           myControllerLastName.text,
           myControllerUsername.text,
@@ -48,20 +56,43 @@ class _MyCreateAccountPageState extends State<CreateAccountPage> {
           myControllerEmail.text,
           myControllerAge.text);
 
-      setState(() {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => const MyApp()),
-        );
-      });
+      // setState(() {
+      //   Navigator.push(
+      //     context,
+      //     MaterialPageRoute(builder: (context) => const MyApp()),
+      //   );
+      // });
+      if (await accountCreated == 'true') {
+        Utils.showMyDialog('Success',
+            'Account created successfully! Please login with your credentials.',
+            context);
+        setState(() {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const LoginPage()),
+          );
+        });
+      } else {
+        Utils.showMyDialog(
+            'Failed', 'Account creation failed! ' + await accountCreated,
+            context);
+      }
+    }else{
+      Utils.showMyDialog('Error', 'Please provide same email id for both username and email fields', context);
+    }
     } else {
-      setState(() {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (context) => const MyAppLogin()),
-        );
-      });
+      var error;
+      if(myControllerPassword.text != myControllerRepeatPassword.text){
+        error = " Passwords don't match";
+      }
+      if(myControllerUsername.text.trim() == '' && existedAcount){
+        error = " Empty user name";
+      }
+      if(myControllerEmail.text.trim() == ''){
+        error = " Empty email field";
+      }
+      Utils.showMyDialog('Failed', 'Account creation failed!' + error, context);
+
     }
   }
 
@@ -69,7 +100,7 @@ class _MyCreateAccountPageState extends State<CreateAccountPage> {
     setState(() {
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => const MyAppLogin()),
+        MaterialPageRoute(builder: (context) => const LoginPage()),
       );
     });
   }
@@ -133,7 +164,7 @@ class _MyCreateAccountPageState extends State<CreateAccountPage> {
                 key: Key('createaccountpassword'),
                 controller: myControllerPassword,
                 maxLength: 20,
-                obscureText: false,
+                obscureText: true,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
                   labelText: 'Password',
@@ -147,7 +178,7 @@ class _MyCreateAccountPageState extends State<CreateAccountPage> {
                 key: Key('createaccountrepeat'),
                 controller: myControllerRepeatPassword,
                 maxLength: 20,
-                obscureText: false,
+                obscureText: true,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
                   labelText: 'Repeat Password',
@@ -205,4 +236,5 @@ class _MyCreateAccountPageState extends State<CreateAccountPage> {
       ),
     );
   }
+
 }
