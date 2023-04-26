@@ -15,6 +15,7 @@ import 'login_page.dart';
 import 'friends_list.dart';
 import 'dart:async';
 
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
