@@ -130,9 +130,10 @@ https://swe6813-bestmatcher.web.app
 
 <h2>Sprint 2 Forecast and Rationale</h2>
 
+Our forecast was 31 points for this sprint. Since it was the last sprint, we needed to finish up some additional goals for our project and now that the team was more familiar with the tech stack we thought that we could take on additional points and finish intime.  
 
 Sprint 2 Backlog: 
-![Screenshot]()
+![Screenshot](https://github.com/rfueston/SWE6813_TEAM_8_BestMatcher/blob/Storage/backlog_3.png)
 
 <h2>Sprint Board</h2>
 
