@@ -6,68 +6,48 @@ import 'account_login.dart';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-const List<String> rating = ["0","1","2","3","4","5","6","7","8","9","10"];
+const List<String> rating = ["0","1","2","3","4","5"];
 final user = currentUser;
 
 class GameProfile {
   final String? id;
-  final int? aggressive;
-  final int? communication;
-  final int? leader;
-  final int? multiplayer;
-  final int? sameagegroup;
+  final int? aggression;
   final int? seriousness;
   final int? skill;
   final int? strategy;
-  final int? trashtalk;
-  final int? upset;
+  final int? teamwork;
 
-  // GameProfile({required this.aggressive, required this.communication,
-  //   required this.leader, required this.multiplayer,
-  //   required this.sameagegroup, required this.seriousness, required this.skill,
-  //   required this.strategy, required this.trashtalk, required this.upset});
-  const GameProfile({this.id, this.aggressive, this.communication,
-    this.leader, this.multiplayer,
-    this.sameagegroup, this.seriousness, this.skill,
-    this.strategy, this.trashtalk,  this.upset});
+  // GameProfile({required this.aggression, required this.seriousness,
+  //   required this.skill, required this.strategy,
+  //    required this.teamwork});
+  const GameProfile({this.id, this.aggression, this.seriousness,
+    this.skill, this.strategy, this.teamwork});
 
   toJson() {
-    return {"aggressive": aggressive, "communication": communication,
-      "leader": leader, "multiplayer": multiplayer,
-      "sameagegroup": sameagegroup, "seriousness": seriousness,
-      "skill": skill, "strategy": strategy,
-      "trashtalk": trashtalk, "upset": upset};
+    return {"aggression": aggression, "seriousness": seriousness,
+      "leader": skill, "strategy": strategy,
+      "teamwork": teamwork};
   }
 
   // factory GameProfile.fromFirestore(DocumentSnapshot doc) {
   //   Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
   //   return GameProfile(
-  //     aggressive: data['aggressive'] ?? 0,
-  //     communication: data['communication'] ?? 0,
-  //     leader: data['leader'] ?? 0,
-  //     multiplayer: data['multiplayer'] ?? 0,
-  //     sameagegroup: data['sameagegroup'] ?? 0,
+  //     aggression: data['aggression'] ?? 0,
   //     seriousness: data['seriousness'] ?? 0,
   //     skill: data['skill'] ?? 0,
   //     strategy: data['strategy'] ?? 0,
-  //     trashtalk: data['trashtalk'] ?? 0,
-  //     upset: data['upset'] ?? 0,
+  //     teamwork: data['teamwork'] ?? 0,
   //   );
   // }
   factory GameProfile.fromSnapshot(DocumentSnapshot<Map<String, dynamic>> document){
     final data = document.data()!;
     return GameProfile(
           id: document.id,
-          aggressive: data['aggressive'],
-          communication: data['communication'],
-          leader: data['leader'] ?? 0,
-          multiplayer: data['multiplayer'],
-          sameagegroup: data['sameagegroup'],
+          aggression: data['aggression'],
           seriousness: data['seriousness'],
-          skill: data['skill'],
+          skill: data['skill'] ?? 0,
           strategy: data['strategy'],
-          trashtalk: data['trashtalk'],
-          upset: data['upset'],
+          teamwork: data['teamwork'],
     );
   }
 }
@@ -93,21 +73,16 @@ class WidgetSetup extends StatefulWidget {
 class _WidgetSetupState extends State<WidgetSetup> {
 
   // GameProfile myGameProfile = GameProfile(
-  //     aggressive: 0,
-  //     communication: 0,
-  //     leader: 0,
-  //     multiplayer: 0,
-  //     sameagegroup: 0,
+  //     aggression: 0,
   //     seriousness: 0,
   //     skill: 0,
   //     strategy: 0,
-  //     trashtalk: 0,
-  //     upset: 0);
+  //     teamwork: 0,
 
   //get data from Firebase
-  _WidgetSetupState() {
+  //_WidgetSetupState() {
 
-  }
+ // }
   final _db = FirebaseFirestore.instance;
   Future<List<GameProfile>> getMyGameProfile(String user) async {
     final snapshot = await _db.collection("GameProfiles").get();
@@ -116,7 +91,7 @@ class _WidgetSetupState extends State<WidgetSetup> {
     return myGameProfile;
   }
 
-  Future<void> udpateGameProfile(String ratingType, int rate) async{
+  Future<void> updateGameProfile(String ratingType, int rate) async{
     final CollectionReference myAdvCollection =
     FirebaseFirestore.instance.collection("GameProfiles");
 
@@ -135,16 +110,12 @@ class _WidgetSetupState extends State<WidgetSetup> {
     });
   }
 
-  String _curaggressive = "0";
-  String _curcommunication = "0";
-  String _curleader = "0";
-  String _curmultiplayer = "0";
-  String _cursameagegroup = "0";
+  String _curaggression = "0";
   String _curseriousness = "0";
   String _curskill = "0";
   String _curstrategy = "0";
-  String _curtrashtalk = "0";
-  String _curupset = "0";
+  String _curteamwork = "0";
+
 
   @override
   Widget build(BuildContext context) {
@@ -159,28 +130,12 @@ class _WidgetSetupState extends State<WidgetSetup> {
                       if (snapshot.hasData) {
                         for (var element in snapshot.data!) {
                           if (element.id == user) {
-                            _curaggressive = element.aggressive.toString() ?? "O";
-                            if (_curaggressive == "null"){
-                              _curaggressive = "0";
+                            _curaggression = element.aggression.toString() ?? "O";
+                            if (_curaggression == "null"){
+                              _curaggression = "0";
                             }
-                            _curcommunication = element.communication
+                            _curseriousness = element.seriousness
                                 .toString() ?? "O";
-                            if (_curcommunication == "null"){
-                              _curcommunication = "0";
-                            }
-                            _curleader = element.leader.toString() ?? "O";
-                            if (_curleader == "null"){
-                              _curleader = "0";
-                            }
-                            _curmultiplayer = element.multiplayer.toString() ?? "O";
-                            if (_curmultiplayer == "null"){
-                              _curmultiplayer = "0";
-                            }
-                            _cursameagegroup = element.sameagegroup.toString() ?? "O";
-                            if (_cursameagegroup == "null"){
-                              _cursameagegroup = "0";
-                            }
-                            _curseriousness = element.seriousness.toString() ?? "O";
                             if (_curseriousness == "null"){
                               _curseriousness = "0";
                             }
@@ -192,13 +147,9 @@ class _WidgetSetupState extends State<WidgetSetup> {
                             if (_curstrategy == "null"){
                               _curstrategy = "0";
                             }
-                            _curtrashtalk = element.trashtalk.toString() ?? "O";
-                            if (_curtrashtalk == "null"){
-                              _curtrashtalk = "0";
-                            }
-                            _curupset = element.upset.toString() ?? "O";
-                            if (_curupset == "null"){
-                              _curupset = "0";
+                            _curteamwork = element.teamwork.toString() ?? "O";
+                            if (_curteamwork  == "null"){
+                              _curteamwork = "0";
                             }
                           }
                         }
@@ -213,7 +164,7 @@ class _WidgetSetupState extends State<WidgetSetup> {
                                       color: Colors.blue),),
                               ),
                               Container(
-                                child: Text("Rate your agressiveness is your playing style:"),
+                                child: Text("Rate your aggression in your playing style from 0 to 5, with 0 being least aggressive and 5 being the most:"),
                               ),
                               Container(
                                 child: DropdownButton<String>(
@@ -223,7 +174,7 @@ class _WidgetSetupState extends State<WidgetSetup> {
                                       child: Text(value.toString()),
                                     );
                                   }).toList(),
-                                  value: _curaggressive.toString(),
+                                  value: _curaggression.toString(),
                                   icon: const Icon(Icons.arrow_downward),
                                   elevation: 16,
                                   style: const TextStyle(color: Colors.deepPurple),
@@ -234,126 +185,14 @@ class _WidgetSetupState extends State<WidgetSetup> {
                                   onChanged: (String? value) {
                                     // This is called when the user selects an item.
                                     setState(() {
-                                      udpateGameProfile("aggressive", int.parse(value!));
-                                      _curaggressive = value;
+                                      updateGameProfile("aggression", int.parse(value!));
+                                      _curaggression = value;
                                     });
                                   },
                                 ),
                               ),
                               Container(
-                                child: Text("Rate your communication skill:"),
-                              ),
-                              Container(
-                                child: DropdownButton<String>(
-                                  items: rating.map<DropdownMenuItem<String>>((String value) {
-                                    return DropdownMenuItem<String>(
-                                      value: value.toString(),
-                                      child: Text(value.toString()),
-                                    );
-                                  }).toList(),
-                                  value: _curcommunication.toString(),
-                                  icon: const Icon(Icons.arrow_downward),
-                                  elevation: 16,
-                                  style: const TextStyle(color: Colors.deepPurple),
-                                  underline: Container(
-                                    height: 2,
-                                    color: Colors.deepPurpleAccent,
-                                  ),
-                                  onChanged: (String? value) {
-                                    // This is called when the user selects an item.
-                                    setState(() {
-                                      udpateGameProfile("communication", int.parse(value!));
-                                      _curcommunication = value;
-                                    });
-                                  },
-                                ),
-                              ),
-                              Container(
-                                child: Text("Rate your leadership skill:"),
-                              ),
-                              Container(
-                                child: DropdownButton<String>(
-                                  items: rating.map<DropdownMenuItem<String>>((String value) {
-                                    return DropdownMenuItem<String>(
-                                      value: value.toString(),
-                                      child: Text(value.toString()),
-                                    );
-                                  }).toList(),
-                                  value: _curleader.toString(),
-                                  icon: const Icon(Icons.arrow_downward),
-                                  elevation: 16,
-                                  style: const TextStyle(color: Colors.deepPurple),
-                                  underline: Container(
-                                    height: 2,
-                                    color: Colors.deepPurpleAccent,
-                                  ),
-                                  onChanged: (String? value) {
-                                    // This is called when the user selects an item.
-                                    setState(() {
-                                      udpateGameProfile("leader", int.parse(value!));
-                                      _curleader = value;
-                                    });
-                                  },
-                                ),
-                              ),
-                              Container(
-                                child: Text("Rate your multiplayer skill:"),
-                              ),
-                              Container(
-                                child: DropdownButton<String>(
-                                  items: rating.map<DropdownMenuItem<String>>((String value) {
-                                    return DropdownMenuItem<String>(
-                                      value: value.toString(),
-                                      child: Text(value.toString()),
-                                    );
-                                  }).toList(),
-                                  value: _curmultiplayer.toString(),
-                                  icon: const Icon(Icons.arrow_downward),
-                                  elevation: 16,
-                                  style: const TextStyle(color: Colors.deepPurple),
-                                  underline: Container(
-                                    height: 2,
-                                    color: Colors.deepPurpleAccent,
-                                  ),
-                                  onChanged: (String? value) {
-                                    // This is called when the user selects an item.
-                                    setState(() {
-                                      udpateGameProfile("multiplayer", int.parse(value!));
-                                      _curmultiplayer = value;
-                                    });
-                                  },
-                                ),
-                              ),
-                              Container(
-                                child: Text("Do you want to play in the same age group:"),
-                              ),
-                              Container(
-                                child: DropdownButton<String>(
-                                  items: rating.map<DropdownMenuItem<String>>((String value) {
-                                    return DropdownMenuItem<String>(
-                                      value: value.toString(),
-                                      child: Text(value.toString()),
-                                    );
-                                  }).toList(),
-                                  value: _cursameagegroup.toString(),
-                                  icon: const Icon(Icons.arrow_downward),
-                                  elevation: 16,
-                                  style: const TextStyle(color: Colors.deepPurple),
-                                  underline: Container(
-                                    height: 2,
-                                    color: Colors.deepPurpleAccent,
-                                  ),
-                                  onChanged: (String? value) {
-                                    // This is called when the user selects an item.
-                                    setState(() {
-                                      udpateGameProfile("sameagegroup", int.parse(value!));
-                                      _cursameagegroup = value;
-                                    });
-                                  },
-                                ),
-                              ),
-                              Container(
-                                child: Text("Rate your seriousness when playing games:"),
+                                child: Text("Rate how seriously you take the game from 0 to 5:"),
                               ),
                               Container(
                                 child: DropdownButton<String>(
@@ -374,14 +213,14 @@ class _WidgetSetupState extends State<WidgetSetup> {
                                   onChanged: (String? value) {
                                     // This is called when the user selects an item.
                                     setState(() {
-                                      udpateGameProfile("seriousness", int.parse(value!));
+                                      updateGameProfile("seriousness", int.parse(value!));
                                       _curseriousness = value;
                                     });
                                   },
                                 ),
                               ),
                               Container(
-                                child: Text("Rate your playing skill:"),
+                                child: Text("Rate your skill at the game from 0 to 5:"),
                               ),
                               Container(
                                 child: DropdownButton<String>(
@@ -402,14 +241,14 @@ class _WidgetSetupState extends State<WidgetSetup> {
                                   onChanged: (String? value) {
                                     // This is called when the user selects an item.
                                     setState(() {
-                                      udpateGameProfile("skill", int.parse(value!));
+                                      updateGameProfile("skill", int.parse(value!));
                                       _curskill = value;
                                     });
                                   },
                                 ),
                               ),
                               Container(
-                                child: Text("Rate your strategic skill:"),
+                                child: Text("Rate how much you strategize when you play the game from 0 to 5, with 0 being not at all and 5 being you only play with strategy:"),
                               ),
                               Container(
                                 child: DropdownButton<String>(
@@ -430,14 +269,14 @@ class _WidgetSetupState extends State<WidgetSetup> {
                                   onChanged: (String? value) {
                                     // This is called when the user selects an item.
                                     setState(() {
-                                      udpateGameProfile("strategy", int.parse(value!));
+                                      updateGameProfile("strategy", int.parse(value!));
                                       _curstrategy = value;
                                     });
                                   },
                                 ),
                               ),
                               Container(
-                                child: Text("Do you trash talk when playing games:"),
+                                child: Text("Rate how well you work in a team from 0 to 5"),
                               ),
                               Container(
                                 child: DropdownButton<String>(
@@ -447,7 +286,7 @@ class _WidgetSetupState extends State<WidgetSetup> {
                                       child: Text(value.toString()),
                                     );
                                   }).toList(),
-                                  value: _curtrashtalk.toString(),
+                                  value: _curteamwork.toString(),
                                   icon: const Icon(Icons.arrow_downward),
                                   elevation: 16,
                                   style: const TextStyle(color: Colors.deepPurple),
@@ -458,36 +297,8 @@ class _WidgetSetupState extends State<WidgetSetup> {
                                   onChanged: (String? value) {
                                     // This is called when the user selects an item.
                                     setState(() {
-                                      udpateGameProfile("trashtalk", int.parse(value!));
-                                      _curtrashtalk = value;
-                                    });
-                                  },
-                                ),
-                              ),
-                              Container(
-                                child: Text("Do you get upset when you lose:"),
-                              ),
-                              Container(
-                                child: DropdownButton<String>(
-                                  items: rating.map<DropdownMenuItem<String>>((String value) {
-                                    return DropdownMenuItem<String>(
-                                      value: value.toString(),
-                                      child: Text(value.toString()),
-                                    );
-                                  }).toList(),
-                                  value: _curupset.toString(),
-                                  icon: const Icon(Icons.arrow_downward),
-                                  elevation: 16,
-                                  style: const TextStyle(color: Colors.deepPurple),
-                                  underline: Container(
-                                    height: 2,
-                                    color: Colors.deepPurpleAccent,
-                                  ),
-                                  onChanged: (String? value) {
-                                    // This is called when the user selects an item.
-                                    setState(() {
-                                      udpateGameProfile("upset", int.parse(value!));
-                                      _curupset = value;
+                                      updateGameProfile("teamwork", int.parse(value!));
+                                      _curteamwork = value;
                                     });
                                   },
                                 ),
