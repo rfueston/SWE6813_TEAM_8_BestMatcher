@@ -7,7 +7,7 @@ import 'account_login.dart';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-const List<String> rating = ["0","1","2","3","4","5"];
+const List<String> rating = ["-","0","1","2","3","4","5"];
 final user = FirebaseAuth.instance.currentUser?.email;
 
 
@@ -47,7 +47,7 @@ class GameProfile {
           id: document.id,
           aggression: data['aggression'],
           seriousness: data['seriousness'],
-          skill: data['skill'] ?? 0,
+          skill: data['skill'],
           strategy: data['strategy'],
           teamwork: data['teamwork'],
     );
@@ -56,6 +56,7 @@ class GameProfile {
 
 
 class QuestionnairePage extends StatelessWidget {
+
 
   @override
     Widget build(BuildContext context) {
@@ -112,11 +113,11 @@ class _WidgetSetupState extends State<WidgetSetup> {
     });
   }
 
-  String _curaggression = "0";
-  String _curseriousness = "0";
-  String _curskill = "0";
-  String _curstrategy = "0";
-  String _curteamwork = "0";
+  String _curaggression = "-";
+  String _curseriousness = "-";
+  String _curskill = "-";
+  String _curstrategy = "-";
+  String _curteamwork = "-";
 
 
   @override
@@ -134,24 +135,24 @@ class _WidgetSetupState extends State<WidgetSetup> {
                           if (element.id == user) {
                             _curaggression = element.aggression.toString() ?? "O";
                             if (_curaggression == "null"){
-                              _curaggression = "0";
+                              _curaggression = "-";
                             }
                             _curseriousness = element.seriousness
                                 .toString() ?? "O";
                             if (_curseriousness == "null"){
-                              _curseriousness = "0";
+                              _curseriousness = "-";
                             }
                             _curskill = element.skill.toString() ?? "O";
                             if (_curskill == "null"){
-                              _curskill = "0";
+                              _curskill = "-";
                             }
                             _curstrategy = element.strategy.toString() ?? "O";
                             if (_curstrategy == "null"){
-                              _curstrategy = "0";
+                              _curstrategy = "-";
                             }
                             _curteamwork = element.teamwork.toString() ?? "O";
                             if (_curteamwork  == "null"){
-                              _curteamwork = "0";
+                              _curteamwork = "-";
                             }
                           }
                         }
@@ -160,13 +161,21 @@ class _WidgetSetupState extends State<WidgetSetup> {
                               Container(
                                 padding: EdgeInsets.only(bottom: 10),
                                 child: Text(
-                                  "Rate your gaming profile",
+                                  "Make your gaming profile",
                                   style: TextStyle(
                                       fontSize: 20,
                                       color: Colors.blue),),
                               ),
                               Container(
-                                child: Text("Rate your aggression in your playing style from 0 to 5, with 0 being least aggressive and 5 being the most:"),
+                                padding: EdgeInsets.only(bottom: 10),
+                                child: Text(
+                                  "Rate the following statements about your playing style from 0 to 5, with 0 being the least and 5 being the most.",
+                                  style: TextStyle(
+                                    fontSize: 15,
+                                    color: Colors.blueGrey),)
+                              ),
+                              Container(
+                                child: Text("Rate your aggression when you play:"),
                               ),
                               Container(
                                 child: DropdownButton<String>(
@@ -194,7 +203,7 @@ class _WidgetSetupState extends State<WidgetSetup> {
                                 ),
                               ),
                               Container(
-                                child: Text("Rate how seriously you take the game from 0 to 5:"),
+                                child: Text("Rate how seriously you take the game:"),
                               ),
                               Container(
                                 child: DropdownButton<String>(
@@ -222,7 +231,7 @@ class _WidgetSetupState extends State<WidgetSetup> {
                                 ),
                               ),
                               Container(
-                                child: Text("Rate your skill at the game from 0 to 5:"),
+                                child: Text("Rate your skill at the game:"),
                               ),
                               Container(
                                 child: DropdownButton<String>(
@@ -250,7 +259,7 @@ class _WidgetSetupState extends State<WidgetSetup> {
                                 ),
                               ),
                               Container(
-                                child: Text("Rate how much you strategize when you play the game from 0 to 5, with 0 being not at all and 5 being you only play with strategy:"),
+                                child: Text("Rate how much you strategize when you play the game:"),
                               ),
                               Container(
                                 child: DropdownButton<String>(
@@ -278,7 +287,7 @@ class _WidgetSetupState extends State<WidgetSetup> {
                                 ),
                               ),
                               Container(
-                                child: Text("Rate how well you work in a team from 0 to 5"),
+                                child: Text("Rate how well you work in a team:"),
                               ),
                               Container(
                                 child: DropdownButton<String>(
@@ -305,7 +314,22 @@ class _WidgetSetupState extends State<WidgetSetup> {
                                   },
                                 ),
                               ),
+                              Container(
+                                child: Row(
+                                  children: [
+                                    ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                        minimumSize: Size(100, 40),
+                                        maximumSize: Size(300, 40),
+                                      ),
+                                      onPressed: null,
+                                      child: const Icon(Icons.outgoing_mail),
+                                    ),
+                                  ],
+                                ),
+                              ),
                             ]
+
                         );
                       } else if (snapshot.hasError){
                         return Center(child: Text(snapshot.error.toString()));
@@ -316,6 +340,7 @@ class _WidgetSetupState extends State<WidgetSetup> {
                       return const Center(child: CircularProgressIndicator());
                     }
                   }
+
               )
           ))
       ),
@@ -324,8 +349,8 @@ class _WidgetSetupState extends State<WidgetSetup> {
 
 }
 
-/*class QuestionnairePage extends StatelessWidget {
-  void _submitForm() {}
+
+/*
 
   void _clearForm() {}
 
@@ -415,28 +440,7 @@ class _WidgetSetupState extends State<WidgetSetup> {
                 'Do you come up with strategies with the team or try to play solo?',
               ),
             ),
-            Container(
-              child: Row(
-                children: [
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      minimumSize: Size(100, 40),
-                      maximumSize: Size(300, 40),
-                    ),
-                    onPressed: _submitForm,
-                    child: const Icon(Icons.outgoing_mail),
-                  ),
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      minimumSize: Size(100, 40),
-                      maximumSize: Size(300, 40),
-                    ),
-                    onPressed: _clearForm,
-                    child: const Icon(Icons.cancel_presentation_rounded),
-                  ),
-                ],
-              ),
-            ),
+
           ],
         ),
       ),
