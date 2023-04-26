@@ -153,9 +153,7 @@ LINK
 <h2>Paired and Mobbed Programming</h2>
 
 Paired Programming!
-![Screenshot]()
-
-![Screenshot]()
+![Screenshot](https://github.com/rfueston/SWE6813_TEAM_8_BestMatcher/blob/Storage/Pair_3.png)
 
 Mob Programming!
 ![Screenshot]()
