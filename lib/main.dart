@@ -184,7 +184,7 @@ class MyHomePageState extends State<NavigationBar> {
                     label: Text('friends list'),
                   ),
                   NavigationRailDestination(
-                    icon: Icon(Icons.security),
+                    icon: Icon(Icons.account_box),
                     label: Text('account profile'),
                   ),
                   NavigationRailDestination(
