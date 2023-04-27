@@ -164,7 +164,7 @@ Mob Programming!
 <h2>A-TDD Results</h2>
 
 ![Screenshot](https://github.com/rfueston/SWE6813_TEAM_8_BestMatcher/blob/Storage/chat_test_3.png)
-![Screenshot](https://github.com/rfueston/SWE6813_TEAM_8_BestMatcher/blob/Storage/friends_test.png)
+![Screenshot](https://github.com/rfueston/SWE6813_TEAM_8_BestMatcher/blob/Storage/friends_test_3.png)
 ![Screenshot](https://github.com/rfueston/SWE6813_TEAM_8_BestMatcher/blob/Storage/login_test_3.png)
 ![Screenshot](https://github.com/rfueston/SWE6813_TEAM_8_BestMatcher/blob/Storage/main_test_3.png)
 ![Screenshot](https://github.com/rfueston/SWE6813_TEAM_8_BestMatcher/blob/Storage/quest_test_3.png)
