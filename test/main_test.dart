@@ -4,6 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:best_matcher/main.dart';
 import 'package:fake_cloud_firestore/fake_cloud_firestore.dart';
 import './mock.dart';
+
 void main() {
   setupFirebaseAuthMocks();
   setUpAll(() async {
