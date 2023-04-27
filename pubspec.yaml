@@ -18,11 +18,11 @@ dependencies:
   english_words: ^4.0.0
   flutter_dotenv: ^5.0.0
   carousel_slider: ^4.2.1
+  image_network: ^2.5.1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  cloud_firestore: ^4.4.5
   firebase_core: ^2.8.0
   firebase_auth: ^4.3.0
   english_words: ^4.0.0
