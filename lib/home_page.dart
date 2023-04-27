@@ -13,7 +13,7 @@ class HomePage extends StatelessWidget {
     //TODO: implement FireBase auth lib instead of custom
     final user = FirebaseAuth.instance.currentUser;
 
-    log("Email : " + user!.email!);
+    // log("Email : " + user!.email!);
     return Scaffold(
         body: Center(
       //   //TODO: add new stream method
@@ -25,7 +25,7 @@ class HomePage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             //TODO: implement FireBase auth lib instead of custom
-            Text('Welcome, ' + user.email! + ','),
+            Text('Welcome, ${user?.email},'),
             Text('News: First version of the app live!'),
           ]),
     ));

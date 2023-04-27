@@ -30,7 +30,6 @@ class _MyCreateAccountPageState extends State<CreateAccountPage> {
     myControllerEmail.dispose();
     myControllerAge.dispose();
     super.dispose();
-    super.dispose();
   }
 
   Future<void> _createAccountLogin() async {

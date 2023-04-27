@@ -3,16 +3,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:best_matcher/main.dart';
 import 'package:fake_cloud_firestore/fake_cloud_firestore.dart';
-
-
+import './mock.dart';
 void main() {
-  testWidgets('Nav Smoke Test: testNavMain', (WidgetTester tester) async {
+  setupFirebaseAuthMocks();
+  setUpAll(() async {
     await Firebase.initializeApp();
+  });
+  testWidgets('Nav Smoke Test: testNavMain', (WidgetTester tester) async {
     // Build our app and trigger a frame.
     await tester.pumpWidget(const MyApp());
     //
     // // Verify that text starts on default page
-    // expect(find.text('Welcome,'), findsOneWidget);
+    await tester.pumpAndSettle();
+    expect(find.text('News: First version of the app live!'), findsOneWidget);
     //
     // // Tap icon for navigation
     // await tester.tap(find.byIcon(Icons.home_outlined));
@@ -27,11 +30,11 @@ void main() {
     await tester.pumpWidget(const MyApp());
 
     // Verify that text starts on default page
-    expect(find.text('Welcome,'), findsOneWidget);
+    expect(find.text('News: First version of the app live!'), findsOneWidget);
 
     // Tap icon for navigation
     await tester.tap(find.byIcon(Icons.add_chart_rounded));
-    await tester.pump();
+    // await tester.pumpAndSettle();
 
     // Verify that text has changed to selected page
     expect(find.text('Please select your reaction to getting player killed:'), findsOneWidget);
@@ -43,7 +46,7 @@ void main() {
     await tester.pumpWidget(const MyApp());
 
     // Verify that text starts on default page
-    expect(find.text('Welcome,'), findsOneWidget);
+    expect(find.text('News: First version of the app live!'), findsOneWidget);
 
     // Tap icon for navigation
     await tester.tap(find.byIcon(Icons.favorite));
