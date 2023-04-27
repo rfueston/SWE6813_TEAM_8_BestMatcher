@@ -30,7 +30,7 @@ class FriendsListPage extends StatelessWidget {
         ),
         for (var friend in appState.friends)
           ListTile(
-            leading: Icon(Icons.heart_broken),
+            leading: Icon(Icons.favorite),
             title: Text(friend),
           ),
       ],
