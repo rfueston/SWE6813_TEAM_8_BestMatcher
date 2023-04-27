@@ -14,16 +14,16 @@ void main() {
 
     // Verify that text starts on login page
     expect(find.text('News will go here!'), findsNothing);
-
+    await tester.pumpAndSettle();
     //log in page is present
-    // expect(find.text('Username'), findsOneWidget);
-    // expect(find.text('Password'), findsOneWidget);
+    expect(find.text('Username'), findsOneWidget);
+    expect(find.text('Password'), findsOneWidget);
   });
 
   testWidgets('Login Smoke Test: testLogInScreenButtonsPresent', (WidgetTester tester) async {
     // Build our app and trigger a frame.
     await tester.pumpWidget(const MyAppLogin());
-
+    await tester.pumpAndSettle();
     // Verify that text starts on login page
     expect(find.text('News will go here!'), findsNothing);
 
@@ -36,7 +36,7 @@ void main() {
       'Login Smoke Test: testLogInWithAccount', (WidgetTester tester) async {
     // Build our app and trigger a frame.
     await tester.pumpWidget(const MyAppLogin());
-
+    await tester.pumpAndSettle();
     // Verify that text starts on login page
     expect(find.text('News will go here!'), findsNothing);
 
@@ -53,7 +53,7 @@ void main() {
       'Login Smoke Test: testLogInWithToManyCharacters', (WidgetTester tester) async {
     // Build our app and trigger a frame.
     await tester.pumpWidget(const MyAppLogin());
-
+    await tester.pumpAndSettle();
     // Verify that text starts on login page
     expect(find.text('News will go here!'), findsNothing);
 
@@ -69,7 +69,7 @@ void main() {
       'Login Smoke Test: testLogInUsernameNotObscured', (WidgetTester tester) async {
     // Build our app and trigger a frame.
     await tester.pumpWidget(const MyAppLogin());
-
+    await tester.pumpAndSettle();
     // Verify that text starts on login page
     expect(find.text('News will go here!'), findsNothing);
 
