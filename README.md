@@ -149,15 +149,17 @@ https://sweksu.atlassian.net/jira/software/projects/WEB/boards/3/reports/burndow
 
 <h2>Sprint Daily Scrum Standup Meeeting</h2>
 
-LINK
+https://youtu.be/uD2qr6l0OHE
 
 <h2>Paired and Mobbed Programming</h2>
 
 Paired Programming!
 ![Screenshot](https://github.com/rfueston/SWE6813_TEAM_8_BestMatcher/blob/Storage/PAIRED_3.png)
 
+![Screenshot](https://github.com/rfueston/SWE6813_TEAM_8_BestMatcher/blob/Storage/paried_3_2.png)
+
 Mob Programming!
-![Screenshot]()
+![Screenshot](https://github.com/rfueston/SWE6813_TEAM_8_BestMatcher/blob/Storage/mobbing_3.png)
 
 <h2>A-TDD Results</h2>
 
@@ -169,7 +171,7 @@ Mob Programming!
 
 Sprint Review:
 
-
+https://youtu.be/VfaX6hDbXbw
 
 Sprint Retro:
 
