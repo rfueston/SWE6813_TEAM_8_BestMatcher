@@ -246,7 +246,7 @@ class MyHomePageState extends State<NavigationBar> {
                   ),
                   NavigationRailDestination(
                     icon: Icon(Icons.people),
-                    label: Text('match making'),
+                    label: Text('find players'),
                   ),
                   NavigationRailDestination(
                     icon: Icon(Icons.settings),
