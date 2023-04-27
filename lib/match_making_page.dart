@@ -24,17 +24,17 @@ class _MatchMakingState extends State<MatchMakingPage> {
   List<Player> _matchingPlayers = [
     Player(
       name: 'Alice - 78% Compatibility',
-      photoUrl: 'https://i.kym-cdn.com/photos/images/original/001/701/671/08c.jpg',
+      // photoUrl: 'https://i.kym-cdn.com/photos/images/original/001/701/671/08c.jpg',
       bio: 'I am so mean during games! I am also bad.',
     ),
     Player(
       name: 'Bob - 50% Compatibility',
-      photoUrl: 'https://i.kym-cdn.com/photos/images/original/001/700/562/659.jpg',
+      // photoUrl: 'https://i.kym-cdn.com/photos/images/original/001/700/562/659.jpg',
       bio: 'I hate video games and I am so good at them.',
     ),
     Player(
       name: 'Charlie - 43% Compatibility',
-      photoUrl: 'https://i.kym-cdn.com/photos/images/original/001/700/567/eae.jpg',
+      // photoUrl: 'https://i.kym-cdn.com/photos/images/original/001/700/567/eae.jpg',
       bio: 'When playing games it is all about teamwork.',
     ),
   ];
@@ -75,7 +75,7 @@ class _MatchMakingState extends State<MatchMakingPage> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(player.name),
-                      Image.network(player.photoUrl),
+                      // Image.network(player.photoUrl),
                       Text(player.bio),
                     ],
                   ),
@@ -138,14 +138,14 @@ class _MatchMakingState extends State<MatchMakingPage> {
 
 class Player {
   final String name;
-  final String photoUrl;
+  // final String photoUrl;
   final String bio;
 
 
 
   Player({
     required this.name,
-    required this.photoUrl,
+    // required this.photoUrl,
     required this.bio,
   });
 }

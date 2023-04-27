@@ -44,11 +44,10 @@ void main() {
 
     // Tap icon for navigation to verify it is present
     await tester.pumpAndSettle();
-    await tester.tap(find.byIcon(Icons.travel_explore_outlined));
+    await tester.tap(find.byIcon(Icons.people));
     await tester.pump();
 
     // Verify that text on home page
-    await tester.pumpAndSettle();
     expect(find.text('Add'), findsOneWidget);
   });
 }

@@ -26,6 +26,8 @@ class HomePage extends StatelessWidget {
           children: <Widget>[
             //TODO: implement FireBase auth lib instead of custom
             Text('Welcome, ${user?.email},'),
+            Text('Have a Great Time match making'),
+            Text('\n'),
             Text('News: First version of the app live!'),
           ]),
     ));

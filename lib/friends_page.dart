@@ -31,7 +31,7 @@ class FriendsPage extends StatelessWidget {
       children: [
         Padding(
           padding: const EdgeInsets.all(20),
-          child: Text(''),
+          child: Text('You Have Friends?'),
         ),
         for (var friend in appState.friends)
           ListTile(

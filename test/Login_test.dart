@@ -20,6 +20,18 @@ void main() {
     expect(find.text('Password'), findsOneWidget);
   });
 
+  testWidgets('Login Smoke Test: testLogInScreenTitle', (WidgetTester tester) async {
+    // Build our app and trigger a frame.
+    await tester.pumpWidget(const MyAppLogin());
+
+    // Verify that text starts on login page
+    expect(find.text('News will go here!'), findsNothing);
+    await tester.pumpAndSettle();
+
+    //icon for navigation to verify it is present
+    expect(find.text('BestMatcher'), findsOneWidget);
+  });
+
   testWidgets('Login Smoke Test: testLogInScreenButtonsPresent', (WidgetTester tester) async {
     // Build our app and trigger a frame.
     await tester.pumpWidget(const MyAppLogin());

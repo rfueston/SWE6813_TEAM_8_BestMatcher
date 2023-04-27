@@ -3,7 +3,6 @@ import 'dart:async';
 
 class FriendsList {
 
-  //TODO: https://sweksu.atlassian.net/browse/WEB-33
   Future<String> setFriendsList(username) async {
     final CollectionReference friendsCollection =
         FirebaseFirestore.instance.collection('Friends');
@@ -21,10 +20,7 @@ class FriendsList {
       }
     });
 
-    print(friendlist);
-
     String test1 = await friendlisttest;
-
 
     return test1;
   }

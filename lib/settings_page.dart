@@ -10,13 +10,12 @@ class SettingsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final user = FirebaseAuth.instance.currentUser;
-    log("Email : " + user!.email!);
     return Scaffold(
         body: Center(
           child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Text(user!.email!),
+                // Text(user!.email!),
                 ElevatedButton.icon(
                   icon: Icon(Icons.arrow_back, size: 32),
                   onPressed: () => FirebaseAuth.instance.signOut(),
