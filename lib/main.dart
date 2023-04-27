@@ -203,7 +203,7 @@ class MyHomePageState extends State<NavigationBar> {
 
     return LayoutBuilder(builder: (context, constraints) {
       final user = FirebaseAuth.instance.currentUser;
-      log("Email : " + user!.email!);
+      // log("Email : " + user!.email);
       return Scaffold(
         appBar: AppBar(
           title: Text(
