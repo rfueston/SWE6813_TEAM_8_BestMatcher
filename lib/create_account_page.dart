@@ -24,6 +24,12 @@ class _MyCreateAccountPageState extends State<CreateAccountPage> {
   void dispose() {
     myControllerUsername.dispose();
     myControllerPassword.dispose();
+    myControllerFirstName.dispose();
+    myControllerLastName.dispose();
+    myControllerRepeatPassword.dispose();
+    myControllerEmail.dispose();
+    myControllerAge.dispose();
+    super.dispose();
     super.dispose();
   }
 
@@ -153,7 +159,7 @@ class _MyCreateAccountPageState extends State<CreateAccountPage> {
                 obscureText: false,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
-                  labelText: 'Username',
+                  labelText: 'Username in email format',
                 ),
               ),
             ),

@@ -25,18 +25,8 @@ class HomePage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             //TODO: implement FireBase auth lib instead of custom
-            Text('Welcome, ' + user.email!),
-            Text('News will go here!'),
-            //TODO: implement FireBase auth lib instead of custom
-            ElevatedButton.icon(
-              icon: Icon(Icons.arrow_back, size: 32),
-              onPressed: () => FirebaseAuth.instance.signOut(),
-              style: ElevatedButton.styleFrom(
-                minimumSize: Size(100, 40),
-                maximumSize: Size(300, 40),
-              ),
-              label: Text("Sign Out", style: TextStyle(fontSize: 24)),
-            ),
+            Text('Welcome, ' + user.email! + ','),
+            Text('News: First version of the app live!'),
           ]),
     ));
   }

@@ -7,8 +7,7 @@ import 'package:provider/provider.dart';
 import 'create_account_page.dart';
 import 'questionnaire_page.dart';
 import 'friends_list_page.dart';
-import 'account_profile_page.dart';
-import 'history_page.dart';
+import 'message_page.dart';
 import 'match_making_page.dart';
 import 'settings_page.dart';
 import 'home_page.dart';
@@ -162,7 +161,7 @@ class MyApp extends StatelessWidget {
 }
 
 class MyAppState extends ChangeNotifier {
-  var friends = {'test', 'test1', 'test2', 'test3', 'test4', 'test5'};
+  var friends = {'test user 2', 'test user 3', 'test user 4', 'test user 5', 'test user 6'};
 
 //TODO: https://sweksu.atlassian.net/browse/WEB-33
 // var friends = FriendsList().setFriendsList("sdu");
@@ -193,15 +192,9 @@ class MyHomePageState extends State<NavigationBar> {
         page = FriendsListPage();
         break;
       case 3:
-        page = AccountProfilePage();
-        break;
-      case 4:
-        page = HistoryPage();
-        break;
-      case 5:
         page = MatchMakingPage();
         break;
-      case 6:
+      case 4:
         page = SettingsPage();
         break;
       default:
@@ -235,14 +228,6 @@ class MyHomePageState extends State<NavigationBar> {
                   NavigationRailDestination(
                     icon: Icon(Icons.favorite),
                     label: Text('friends list'),
-                  ),
-                  NavigationRailDestination(
-                    icon: Icon(Icons.account_box),
-                    label: Text('account profile'),
-                  ),
-                  NavigationRailDestination(
-                    icon: Icon(Icons.history),
-                    label: Text('history'),
                   ),
                   NavigationRailDestination(
                     icon: Icon(Icons.people),
